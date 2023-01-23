@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class ToDo {
+
+            constructor(list) {
+                this.list = []; 
+            }
+
+            add(title, text) {
+                const note = {
+                    title,
+                    text, 
+                    completed: false,
+                }; 
+
+                if (this.checkUniq(title)){
+                    this.list.push(note); 
+                }
+
+                return this.list; 
+            }
+
+            remove(title) {
+                const index = this.list.findIndex(note => note.title === title); 
+                this.list.splice(index, 1) 
+            }
+
+
+            toggle(title) {
+                this.list.forEach(note => {
+                    if(note.title === title){
+                        note.completed = !note.completed
+                    }
+                })
+                return this.list; 
+            }
+
+            checkUniq(title){
+                return !this.list.find(note => note.title === title)
+            } 
+
+            info() {
+                return this.list.reduce((info,note) => {
+                    if (!info.total){
+                        info.total = this.list.length;
+                    }
+
+                    if(!info[note.completed]){
+                        info[note.completed] = 1;
+                    }
+                        info[note.completed]++;
+
+                }, {})
+            }
+
+        }
+
+        let wakeUp = new ToDo; 
+        wakeUp.add("new", "Hi1"); 
+        wakeUp.add("new2", "Hi2"); 
+        wakeUp.add("new3", "Hi3"); 
+    
+    </script>
+</body>
+</html>
