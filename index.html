@@ -36,6 +36,8 @@
                     this.list.push(new Note(title, text))
                 }
 
+                localStorage.setItem(title, text); 
+
                 return this.list; 
             }
 
@@ -45,6 +47,9 @@
                 if (confirmation === true && title === newTitle || this.checkUniq(newTitle)){
                     this.list[index].edit(newTitle, newText)
                 }
+
+                localStorage.setItem(title, newTitle);
+                
             }
 
             removeNote(title, confirmation) {
@@ -53,6 +58,9 @@
                 if (confirmation) {
                     this.list.splice(index, 1) 
                 }
+
+                localStorage.removeItem(title); 
+
             }
 
             toggleNote(title) {
@@ -78,9 +86,10 @@
                         info[note.isCompleted] = 0;
                     }
                         info[note.isCompleted]++;
+                        localStorage.setItem("info", JSON.stringify(this.list))
+                        return info;
                         
-                    return info;
-                }, {})
+                    }, {})
             }
 
         }
@@ -97,10 +106,11 @@
         toDo.toggleNote('new3'); 
         toDo.toggleNote('new4'); 
 
-        // toDo.removeNote('new2', confirm(`Would you like to remove?`));
+        toDo.removeNote('new4', confirm(`Would you like to remove?`));
 
         console.log(toDo.list);
-        toDo.editNote("1", "1", "Hi12", confirm(`Would you like to edit?`)); 
+        // toDo.editNote("1", "1", "Hi12", confirm(`Would you like to edit?`)); 
+        toDo.editNote("new2", "new", "new", confirm(`Would you like to edit?`)); 
 
         console.log(toDo.list);
         console.log(toDo.info());
