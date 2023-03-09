@@ -94,6 +94,10 @@
 
         }
 
+        class Storage{
+            
+        }
+
         let toDo = new List(); 
 
         toDo.addNote("1", "Hi1"); 
@@ -103,13 +107,10 @@
         toDo.addNote("new4", "Hi4"); 
 
         toDo.toggleNote('new2'); 
-        toDo.toggleNote('new3'); 
-        toDo.toggleNote('new4'); 
 
         toDo.removeNote('new4', confirm(`Would you like to remove?`));
 
         console.log(toDo.list);
-        // toDo.editNote("1", "1", "Hi12", confirm(`Would you like to edit?`)); 
         toDo.editNote("new2", "new", "new", confirm(`Would you like to edit?`)); 
 
         console.log(toDo.list);
